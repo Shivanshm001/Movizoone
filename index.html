@@ -6,9 +6,83 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Movizoone</title>
     <link rel="stylesheet" href="./public/style.css">
+
 </head>
-<body>
-    <h1 class="text-4xl">The app is working</h1>
+<body class="bg-slate-300 ">
+    <header class="bg-violet-900 py-6 px-2">
+        <h1 class="px-8 pb-4 text-3xl sm:text-4xl text-white text-center font-semibold">Find the movie that gives you<br/><span id="zonetext" class="font-bold text-4xl sm:text-5xl block pt-2"></span></h1>
+        <nav class=" z-50 sticky top-0 bg-violet-900 py-6 px-2">
+            <div class="flex items-center ">
+                <div class="logo inline"><img src="./public/img/Movizone-logo-croped-removebg.png" class="w-24" alt="Moviezoone logo"></div>
+                <form action="/" method="get" class="w-full mx-4">   
+                    <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-gray-300">Search</label>
+                    <div class="relative">
+                        <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
+                            <svg class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                        </div>
+                        <input type="search" id="default-search" class="block p-4 pl-10 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border outline-none border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Enter movie..." required>
+                        <button type="submit" class="text-white absolute right-2.5 bottom-2.5 bg-pink-600 hover:bg-pink-800 focus:ring-4 focus:outline-none focus:ring-pink-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-pink-500 dark:hover:bg-pink-600 dark:focus:ring-pink-700">Search</button>
+                    </div>
+                </form>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <section id="popular" class="p-8 mt-2 bg-white">
+            <div class="flex flex-col my-12">
+                <h1 class="block text-2xl font-semibold">What's Popular :</h1>
+            </div>
+            <div class="flex overflow-x-scroll overflow-y-hidden gap-8 my-4 popular-card pb-16">
+                <div class="bg-blue-500 min-w-[200px] min-h-[300px] rounded-lg" ></div>
+                <div class="bg-blue-500 min-w-[200px] min-h-[300px] rounded-lg" ></div>
+                <div class="bg-blue-500 min-w-[200px] min-h-[300px] rounded-lg" ></div>
+                <div class="bg-blue-500 min-w-[200px] min-h-[300px] rounded-lg" ></div>
+                <div class="bg-blue-500 min-w-[200px] min-h-[300px] rounded-lg" ></div>
+                <div class="bg-blue-500 min-w-[200px] min-h-[300px] rounded-lg" ></div>
+                <div class="bg-blue-500 min-w-[200px] min-h-[300px] rounded-lg" ></div>
+                <div class="bg-blue-500 min-w-[200px] min-h-[300px] rounded-lg" ></div>
+            </div>
+        </section>
+
+        <section id="trending" class="p-8 pb-0.5 mt-2 bg-slate-800 text-white">
+            <div class="flex flex-col mt-12 mb-12">
+                <h1 class="block text-2xl sm:text-3xl font-semibold">New Release :</h1>
+            </div>
+            <div class="flex overflow-x-scroll overflow-y-hidden gap-8 my-4 trending-card pb-16">
+                <div class="bg-blue-500 min-w-[400px] min-h-[250px] rounded-lg" ></div>
+                <div class="bg-blue-500 min-w-[400px] min-h-[250px] rounded-lg" ></div>
+                <div class="bg-blue-500 min-w-[400px] min-h-[250px] rounded-lg" ></div>
+                <div class="bg-blue-500 min-w-[400px] min-h-[250px] rounded-lg" ></div>
+                <div class="bg-blue-500 min-w-[400px] min-h-[250px] rounded-lg" ></div>
+                <div class="bg-blue-500 min-w-[400px] min-h-[250px] rounded-lg" ></div>
+                <div class="bg-blue-500 min-w-[400px] min-h-[250px] rounded-lg" ></div>
+                <div class="bg-blue-500 min-w-[400px] min-h-[250px] rounded-lg" ></div>
+            </div>
+        </section>
+
+        <section id="trending" class="p-8 bg-white">
+            <div class="flex flex-col mt-12 mb-12">
+                <h1 class="block text-2xl font-semibold">Trending now :</h1>
+            </div>
+            <div class="flex overflow-x-scroll overflow-y-hidden gap-8 my-4 trending-card pb-16">
+                <div class="bg-blue-500 min-w-[200px] min-h-[300px] rounded-lg" ></div>
+                <div class="bg-blue-500 min-w-[200px] min-h-[300px] rounded-lg" ></div>
+                <div class="bg-blue-500 min-w-[200px] min-h-[300px] rounded-lg" ></div>
+                <div class="bg-blue-500 min-w-[200px] min-h-[300px] rounded-lg" ></div>
+                <div class="bg-blue-500 min-w-[200px] min-h-[300px] rounded-lg" ></div>
+                <div class="bg-blue-500 min-w-[200px] min-h-[300px] rounded-lg" ></div>
+                <div class="bg-blue-500 min-w-[200px] min-h-[300px] rounded-lg" ></div>
+                <div class="bg-blue-500 min-w-[200px] min-h-[300px] rounded-lg" ></div>
+            </div>
+        </section>
+        
+    </main>
+    <footer class="bg-white py-8 pb-0.5">
+        <section id="footer" class="flex  flex-col bg-blue-900 p-8">
+            <h1 class=" text-white text-center my-4">Made by shivansh mishra.</h1>
+            <span class=" text-white flex justify-center items-center gap-3  my-4"> Made using the <a href=""><img src"..." alt="TMDB (The movie database)"></a> API.</span>
+        </section>
+    </footer>
     <script src="./public/index.js"></script>
 </body>
 </html>
