@@ -6,18 +6,18 @@ const path = require('path');
 const app = express();
 const apiKey = process.env.TMDB_API_KEY;
 
-//Https routes 
-
 
 //URLs
+const newReleasedURL = `https://api.themoviedb.org/3/discover/movie?release_date.gte=2022-07-01&release_date.lte=2022-07-16&language=en&api_key=${apiKey}`;
 const trendingURL = `https://api.themoviedb.org/3/trending/movie/week?api_key=${apiKey}`;
 
-//Middle ware
+
+
 app.use("/public", express.static(path.join(__dirname, "public")));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-//Set 
+
 app.set('view engine', 'ejs');
 
 //Routes
@@ -27,15 +27,29 @@ app.get("/", (req, res) => {
         https.get(trendingURL, function (response) {
             response.on("data", (data) => {
                 const parsedData = JSON.parse(data);
-                const { results } = parsedData;
+                let  {results} = parsedData;
                 // console.log(results);
-                let trendingDatas = results.map(({ title, poster_path, vote_average }) => ({ title, poster_path, vote_average }));
+                const trendingDatas = results.map(({ title, poster_path, vote_average }) => ({ title, poster_path, vote_average }));
 
                 res.status(200).render("index", { trendingDatas });
             });
         });
     }
     getTrending();
+
+    let getNewReleased = () => {
+        https.get(newReleasedURL, function (response) {
+            response.on("data", (data) => {
+                const parsedData = JSON.parse(data);
+                const { results } = parsedData;
+                // console.log(results);
+                let newReleaseDatas = results.map(({ title, poster_path, vote_average,release_date }) => ({ title, poster_path, vote_average,release_date }));
+
+                res.status(200).render("index", { newReleaseDatas });
+            });
+        });
+    }
+    getNewReleased();
 })
 
 app.get("/singlemovie", (req, res) => {
