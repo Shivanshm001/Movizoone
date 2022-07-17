@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movizoone</title>
+    <link rel="stylesheet" href="./public/style.css">
+
+</head>
+
+<body class="">
+    <!-- Header  -->
+    <%- include('header.ejs') %>
+        <!-- Header end  -->
+        <main class="bg-gray-900">
+            <!-- Trending section  -->
+            <section id="searchedMovies" class="py-12">
+                <div
+                    class="flex overflow-y-hidden overflow-x-scroll gap-12 p-6 pb-20 scrollbar scrollbar-thumb-zinc-600 scrollbar-width-2 scrollbar-track-gray-900">
+
+                    <% searchedMovies.forEach(data=> { %>
+
+                        <a href="/singlemovie?id=<%= data.id %>" alt="<%= data.title %>"
+                            class="border border-white %>rounded-lg bg-black">
+                            <div
+                                class="min-w-[250px] min-h-full rounded-lg trending-card overflow-hidden hover:shadow-md shadow-gray-300">
+                                `
+                                <%- `<img src="https://image.tmdb.org/t/p/original/${data.poster_path}"
+                                    class="max-w-[250px] max-h-[350px] w-full h-max" alt="">` %>
+                                    <p
+                                        class="bg-black flex justify-between items-center font font-semibold text-white px-5 py-4 border-t border-t-white">
+                                        <span class="border border-purple-400">
+                                            <%= data.title %>
+                                        </span><span class="">
+                                            <%= data.vote_average.toFixed(2) %>
+                                        </span>
+                                    </p>
+                            </div>
+                        </a>
+                        <% }); %>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer  -->
+        <%- include('./footer.ejs') %>
+            <script src="./public/index.js"></script>
+</body>
+
+</html>

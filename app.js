@@ -93,12 +93,12 @@ const animatedMovies = async () => {
 animatedMovies();
 
 app.get("/", (req, res) => {
-    res.render("index", { movieDataArrays })
+   while (movieDataArrays.length<= 0) res.send("Loading");
+   res.render("index", { movieDataArrays }); 
 })
 
 app.get("/singlemovie", (req, res) => {
     const query = req.query;
-    console.log(query.id);
     const singleMovieData = async () => {
         try {
             const { data } = await axios({
@@ -117,6 +117,26 @@ app.get("/singlemovie", (req, res) => {
 
 })
 
+app.get("/search",(req,res)=>{
+    const {search} = req.query;
+    const {adult} = req.query;
+    let includeAdult = false;
+    if(adult === true) includeAdult = true;
+    const getSearchedMovie = async ()=>{
+        try {
+            const {data} = await axios({
+                method : 'get',
+                url : `${baseURL}/search/movie?api_key=${apiKey}&language=en-US&query=${search}&page=1&include_adult=${includeAdult}`
+            });
+            const {results} = data;
+            const searchedMovies = results.map(({ title, poster_path, vote_average, id }) => ({ title, poster_path, vote_average, id }));
+            res.render("search",{searchedMovies})
+        } catch (error) {
+            console.log(`Searched movies error : ${error}`);
+        }
+    }
+    getSearchedMovie();
+})
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, (err) => {
