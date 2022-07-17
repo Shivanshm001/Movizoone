@@ -12,8 +12,8 @@ const apiKey = process.env.TMDB_API_KEY;
 const baseURL = "https://api.themoviedb.org/3"
 const newReleasedURL = `${baseURL}/discover/movie?release_date.gte=2022-07-01&release_date.lte=2022-07-16&language=en&api_key=${apiKey}`;
 const trendingURL = `${baseURL}/trending/movie/week?api_key=${apiKey}`;
-const actionURL =  `${baseURL}/discover/movie?language=en&with_genres=action&api_key=${apiKey}`;
-const animatedURL =  `${baseURL}/discover/movie?language=en-US&with_genres=animation&api_key=${apiKey}`;
+const actionURL = `${baseURL}/discover/movie?language=en&with_genres=action&api_key=${apiKey}`;
+const animatedURL = `${baseURL}/discover/movie?language=en-US&with_genres=animation&api_key=${apiKey}`;
 
 
 app.use("/public", express.static(path.join(__dirname, "public")));
@@ -25,7 +25,7 @@ app.set('view engine', 'ejs');
 
 //Routes
 //Array of all filtered movie data
-let movieDataArrays =  [];
+let movieDataArrays = [];
 
 //Trending Moives
 
@@ -36,7 +36,7 @@ const trendingMovies = async () => {
             url: trendingURL
         });
         const { results } = data;
-        const trendingDatas = results.map(({ title, poster_path, vote_average,id }) => ({ title, poster_path, vote_average,id }));
+        const trendingDatas = results.map(({ title, poster_path, vote_average, id }) => ({ title, poster_path, vote_average, id }));
         movieDataArrays.push(trendingDatas);
     } catch (error) {
         console.log(error);
@@ -52,7 +52,7 @@ const newReleasedMovies = async () => {
             url: newReleasedURL
         })
         const { results } = data;
-        let releasedDatas = results.map(({ title, poster_path, vote_average, release_date,id }) => ({ title, poster_path, vote_average, release_date,id }));
+        let releasedDatas = results.map(({ title, poster_path, vote_average, release_date, id }) => ({ title, poster_path, vote_average, release_date, id }));
         movieDataArrays.push(releasedDatas);
     } catch (error) {
         console.log(error);
@@ -68,10 +68,11 @@ const actionMovies = async () => {
             url: actionURL
         });
         const { results } = data;
-        const actionDatas = results.map(({ title, poster_path, vote_average, id }) => ({ title, poster_path, vote_average,id }));
+        const actionDatas = results.map(({ title, poster_path, vote_average, id }) => ({ title, poster_path, vote_average, id }));
         movieDataArrays.push(actionDatas);
     } catch (error) {
-        console.log(error);
+        console.log("Error in axios : " + error);
+        console.log(error.code);
     }
 }
 actionMovies();
@@ -83,20 +84,37 @@ const animatedMovies = async () => {
             url: animatedURL
         });
         const { results } = data;
-        const animatedDatas = results.map(({ title, poster_path, vote_average,id }) => ({ title, poster_path, vote_average,id }));
+        const animatedDatas = results.map(({ title, poster_path, vote_average, id }) => ({ title, poster_path, vote_average, id }));
         movieDataArrays.push(animatedDatas);
     } catch (error) {
         console.log(error);
     }
 }
-actionMovies();
+animatedMovies();
 
 app.get("/", (req, res) => {
     res.render("index", { movieDataArrays })
 })
 
 app.get("/singlemovie", (req, res) => {
-    res.render("singlemovie.ejs")
+    const query = req.query;
+    console.log(query.id);
+    const singleMovieData = async () => {
+        try {
+            const { data } = await axios({
+                method: 'get',
+                url: `${baseURL}/movie/${query.id}?api_key=${apiKey}&language=en-US`
+            });
+            // console.log(data);
+            const {genres} = data;
+            const movieDetails = [data].map(({ title, poster_path, vote_average, id, release_date,overview }) => ({ title, poster_path, vote_average, id,release_date,overview }));
+            res.render("singlemovie.ejs", { movieDetails, genres })
+        } catch (error) {
+            console.log("axios error : " + error);
+        }
+    }
+    singleMovieData();
+
 })
 
 

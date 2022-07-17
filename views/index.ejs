@@ -48,7 +48,7 @@
 
                     <% movieDataArrays[1].forEach(rdata=> { %>
 
-                        <a href="/singlemovie" alt="<%= rdata.title %>" class="border border-white rounded-lg bg-black">
+                        <a href="/singlemovie?id=<%= rdata.id %>" alt="<%= rdata.title %>" class="border border-white rounded-lg bg-black">
                             <div class="min-w-[250px] min-h-full rounded-lg trending-card overflow-hidden">
                                 <%- `<img src="https://image.tmdb.org/t/p/original/${rdata.poster_path}"
                                     class="max-w-[250px] max-h-[350px] w-full h-max" alt="">` %>
@@ -73,18 +73,18 @@
                 <h1 class="p-6 px-8 text-2xl font-semibold text-white underline underline-offset-4">ACTION</h1>
                 <div
                     class="flex overflow-y-hidden overflow-x-scroll gap-12 p-6 pb-20 scrollbar scrollbar-thumb-zinc-600 scrollbar-width-2 scrollbar-track-gray-900">
-                    <% movieDataArrays[2].forEach(data=> { %>
+                    <% movieDataArrays[2].forEach(acdata=> { %>
 
-                        <a href="/singlemovie" alt="<%= data.title %>" class="border border-white rounded-lg bg-black">
+                        <a href="/singlemovie?id=<%= acdata.id %>" alt="<%= acdata.title %>" class="border border-white rounded-lg bg-black">
                             <div class="min-w-[250px] min-h-full rounded-lg trending-card overflow-hidden">
-                                <%- `<img src="https://image.tmdb.org/t/p/original/${data.poster_path}"
+                                <%- `<img src="https://image.tmdb.org/t/p/original/${acdata.poster_path}"
                                     class="max-w-[250px] max-h-[350px] w-full h-max" alt="">` %>
                                     <p
                                         class="bg-black flex justify-between items-center font font-semibold text-white px-5 py-4 border-t border-t-white">
                                         <span class="border border-purple-400">
-                                            <%= data.title %>
+                                            <%= acdata.title %>
                                         </span><span class="">
-                                            <%= data.vote_average.toFixed(2) %>
+                                            <%= acdata.vote_average.toFixed(2) %>
                                         </span>
                                     </p>
                             </div>
@@ -103,7 +103,7 @@
                     
                     <% movieDataArrays[3].forEach(andata=> { %>
 
-                        <a href="/singlemovie" alt="<%= andata.title %>" class="border border-white rounded-lg bg-black">
+                        <a href="/singlemovie?id=<%= andata.id %>" alt="<%= andata.title %>" class="border border-white rounded-lg bg-black">
                             <div class="min-w-[250px] min-h-full rounded-lg trending-card overflow-hidden">
                                 <%- `<img src="https://image.tmdb.org/t/p/original/${andata.poster_path}"
                                     class="max-w-[250px] max-h-[350px] w-full h-max" alt="">` %>
