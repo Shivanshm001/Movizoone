@@ -17,8 +17,8 @@
         <section id="movieimg">
             <% movieDetails.forEach(movieDetail => { %>
                 
-            <div class=" min-w-full min-h-screen flex flex-wrap sm:flex-nowrap p-6 bg-gray-700">
-                <div class="img-container min-h-screen overflow-hidden sm:min-w-max drop-shadow-lg shadow-white">
+            <div class=" min-w-full min-h-screen flex flex-wrap sm:flex-nowrap p-6 bg-gray-700" >
+                <div class="img-container min-h-screen overflow-hidden sm:max-w-[50vh] drop-shadow-lg shadow-white">
                    <img src="https://image.tmdb.org/t/p/original/<%= movieDetail.poster_path %>" class="movie-poster min-h-screen" alt="">
                 </div>
                 <div class="p-12 flex flex-col flex-wrap gap-1 text-white">
@@ -27,7 +27,7 @@
                         <p id="genre" class="text-xl"> <% genres.forEach(genre => { %>
                             <span><%= genre.name %>,</span>
                       <%  }); %></p>
-                        <p id="release-date" class="text-2xl pt-6">Released : <%= movieDetail.release_date %>  </p>
+                        <p id="release-date" class="text-xl pt-6"><%= movieDetail.release_date %>  </p>
                         <p id="rating" class="font-semibold text-lg pt-6">Rating :<%= movieDetail.vote_average %>  </p> 
                         <p class="block pt-6 font-semibold text-3xl">
                             Overview :

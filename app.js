@@ -93,7 +93,6 @@ const animatedMovies = async () => {
 animatedMovies();
 
 app.get("/", (req, res) => {
-   while (movieDataArrays.length<= 0) res.send("Loading");
    res.render("index", { movieDataArrays }); 
 })
 
