@@ -93,7 +93,8 @@ const animatedMovies = async () => {
 animatedMovies();
 
 app.get("/", (req, res) => {
-   res.render("index", { movieDataArrays }); 
+   res.render("index", { movieDataArrays });
+// res.sendFile(path.join(__dirname,"index.html"));
 })
 
 app.get("/singlemovie", (req, res) => {
@@ -137,6 +138,9 @@ app.get("/search",(req,res)=>{
     getSearchedMovie();
 })
 
+app.get("/reviews",(req,res)=>{
+    res.sendFile(__dirname + "/review.html")
+})
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, (err) => {
     if (err) console.log(err);
