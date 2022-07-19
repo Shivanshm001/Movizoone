@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Movizoone</title>
+    <link rel="shortcut icon" href="../public/img/Movizone-logo.png" type="image/x-icon" class="invert">
     <link rel="stylesheet" href="./public/style.css">
 
 </head>
@@ -15,23 +16,23 @@
     <%- include('header.ejs') %>
         <!-- Header end  -->
 
-        <main class="bg-gray-100">
+        <main class="bg-gray-900">
             <!-- Trending section  -->
-            <section id="trending" class="py-12">
-                <h1 class="p-6 px-8 text-2xl font-semibold">TRENDING</h1>
-                <div class="flex overflow-y-hidden overflow-x-scroll gap-12 p-6 pb-20 scrollbar scrollbar-thumb-zinc-400 scrollbar-width-2 scrollbar-track-transparent border border-t-2 border-t-black">
+            <section id="trending" class="py-12 border-t border-t-gray-600">
+                <h1 class="p-6 pt-0 mt-6 px-8 text-2xl font-semibold text-white">TRENDING</h1>
+                <div class="flex overflow-y-hidden overflow-x-scroll gap-24 p-6 pb-20 scrollbar scrollbar-thumb-zinc-400 scrollbar-width-2 scrollbar-track-transparent ">
 
                     <% movieDataArrays[0].forEach(data=> { %>
-                        <a href="/singlemovie?id=<%= data.id %>" alt="<%= data.title %>" class=" border border-black hover:opacity-80 focus:opacity-80 shadow-md hover:shadow-none focus:shadow-none shadow-pink-400 bg-black ">   
-                                <div class="min-w-[220px]  min-h-[300px] trending-card overflow-hidden">
+                        <a href="/singlemovie?id=<%= data.id %>" alt="<%= data.title %>" class=" border border-black hover:opacity-80 focus:opacity-80 hover:shadow-none focus:shadow-none shadow-xl shadow-gray-800 bg-gray-900 ">   
+                                <div class="min-w-[300px]  min-h-[300px] trending-card overflow-hidden">
                                     <%- `<img src="https://image.tmdb.org/t/p/original/${data.poster_path}"
-                                        class="max-w-[220px] w-full h-max" alt="">` %>
+                                        class="max-w-[300px] w-full h-max" alt="">` %>
                                         <p
-                                            class="bg-black flex flex-col  text-white px-6 pb-2 pt-6">
-                                            <span class="font-light text-lg pb-2 border-b border-b-gray-800">
-                                                <%= data.title %>
-                                            </span><span class="pt-3 pl-1 text-gray-700">
+                                            class="bg-transparent flex flex-col text-white px-4 pb-2 pt-4"><span class="pt-2 pl-1 ">
                                                 <%= data.vote_average.toFixed(1) %>
+                                            </span>
+                                            <span class="font-semibold text-lg  border-b border-b-gray-200">
+                                                <%= data.title %>
                                             </span>
                                         </p>
                                 </div>
@@ -41,25 +42,25 @@
             </section>
             <!-- New released section  -->
             
-            <section id="newrelease" class="py-12 border-t border-t-gray-600 bg-zinc-600">
-                <h1 class="p-6 px-8 text-2xl text-white">NEW RELEASES</h1>
-                <div class="flex overflow-y-hidden overflow-x-scroll gap-12 p-6 pb-20 scrollbar scrollbar-thumb-gray-400 scrollbar-width-2 scrollbar-track-transparent border-t-2 border-t-white">
+            <section id="newrelease" class="py-12 border-t border-t-gray-600">
+                <h1 class="p-6 px-8 text-2xl font-semibold">NEW RELEASES</h1>
+                <div class="flex overflow-y-hidden overflow-x-scroll gap-24 p-6 pb-20 scrollbar scrollbar-thumb-zinc-400 scrollbar-width-2 scrollbar-track-transparent ">
 
-                    <% movieDataArrays[1].forEach(rdata=> { %>
-                        <a href="/singlemovie?id=<%= rdata.id %>" alt="<%= rdata.title %>" class="bg-black hover:opacity-80 focus:opacity-80 shadow-md shadow-orange-600 hover:shadow-none focus:shadow-none">   
-                                <div class="min-w-[220px]  min-h-max trending-card overflow-hidden">
-                                    <%- `<img src="https://image.tmdb.org/t/p/original/${rdata.poster_path}"
-                                        class="max-w-[220px] w-full h-max" alt="">` %>
+                    <% movieDataArrays[1].forEach(data=> { %>
+                        <a href="/singlemovie?id=<%= data.id %>" alt="<%= data.title %>" class=" border border-black hover:opacity-80 focus:opacity-80 hover:shadow-none focus:shadow-none shadow-xl shadow-gray-800 bg-gray-900 ">   
+                                <div class="min-w-[300px]  min-h-[300px] trending-card overflow-hidden">
+                                    <%- `<img src="https://image.tmdb.org/t/p/original/${data.poster_path}"
+                                        class="max-w-[300px] w-full h-max" alt="">` %>
                                         <p
-                                            class="bg-transparent flex flex-col px-6 pb-2 pt-6">
-                                            <span class=" font-light text-lg text-white pb-2 border-b border-b-gray-800">
-                                                <%= rdata.title %>
-                                            </span><span class="pt-3 pl-1 text-gray-200">
-                                                <%= rdata.vote_average.toFixed(1) %>
+                                            class="bg-transparent flex flex-col text-white px-4 pb-2 pt-4">
+                                            <span class="text-white"> <%= data.release_date %></span>
+                                            <span class="py-1 pl-1 ">
+                                                <%= data.vote_average.toFixed(1) %>
                                             </span>
-                                            <!-- <span id="releaseDate" class="text-white text-sm block font-light py-3 pl-1"><%#= rdata.release_date %></span> -->
+                                            <span class="font-semibold text-lg  border-b border-b-gray-200">
+                                                <%= data.title %>
+                                            </span>
                                         </p>
-    
                                 </div>
                             </a>
                     <% }); %>
@@ -68,53 +69,49 @@
 
             <!-- Action section  -->
             <section id="action" class="py-12 border-t border-t-gray-600">
-                <h1 class="p-6 px-8 text-2xl  font-semibold">ACTION</h1>
-                <div
-                    class="flex overflow-y-hidden overflow-x-scroll gap-12 p-6 pb-20 scrollbar scrollbar-thumb-gray-600 scrollbar-width-2 scrollbar-track-transparent">
-                    <% movieDataArrays[2].forEach(acdata=> { %>
+                <h1 class="p-6 px-8 text-2xl  font-semibold text-white">ACTION</h1>
+                <div class="flex overflow-y-hidden overflow-x-scroll gap-24 p-6 pb-20 scrollbar scrollbar-thumb-zinc-400 scrollbar-width-2 scrollbar-track-transparent ">
 
-                        <a href="/singlemovie?id=<%= acdata.id %>" alt="<%= acdata.title %>" class=" border border-black hover:opacity-80 focus:opacity-80 shadow-md hover:shadow-none focus:shadow-none shadow-pink-400 bg-black ">   
-                            <div class="min-w-[220px]  min-h-[300px] trending-card overflow-hidden">
-                                <%- `<img src="https://image.tmdb.org/t/p/original/${acdata.poster_path}"
-                                    class="max-w-[220px] w-full h-max" alt="">` %>
-                                    <p
-                                        class="bg-black flex flex-col  text-white px-6 pb-2 pt-6">
-                                        <span class="font-light text-lg pb-2 border-b border-b-gray-800">
-                                            <%= acdata.title %>
-                                        </span><span class="pt-3 pl-1 text-gray-700">
-                                            <%= acdata.vote_average.toFixed(1) %>
-                                        </span>
-                                    </p>
-                            </div>
-                        </a>
+                    <% movieDataArrays[2].forEach(data=> { %>
+                        <a href="/singlemovie?id=<%= data.id %>" alt="<%= data.title %>" class=" border border-black hover:opacity-80 focus:opacity-80 hover:shadow-none focus:shadow-none shadow-xl shadow-gray-800 bg-gray-900 ">   
+                                <div class="min-w-[300px]  min-h-[300px] trending-card overflow-hidden">
+                                    <%- `<img src="https://image.tmdb.org/t/p/original/${data.poster_path}"
+                                        class="max-w-[300px] w-full h-max" alt="">` %>
+                                        <p
+                                            class="bg-transparent flex flex-col text-white px-4 pb-2 pt-4">
+                                            <span class="pt-2 pl-1 ">
+                                                <%= data.vote_average.toFixed(1) %>
+                                            </span>
+                                            <span class="font-semibold text-lg  border-b border-b-gray-200">
+                                                <%= data.title %>
+                                            </span>
+                                        </p>
+                                </div>
+                            </a>
                     <% }); %>
-                
-                    
-                
                 </div>
             </section>
             <!--  Animated Section  -->
-            <section id="animated" class="py-12 border-t border-t-gray-600 bg-zinc-800">
-                <h1 class="p-6 px-8 text-2xl font-semibold text-white underline underline-offset-4">ANIMATED </h1>
-                <div
-                    class="flex overflow-y-hidden overflow-x-scroll gap-12 p-6 pb-20 scrollbar scrollbar-thumb-gray-900 scrollbar-width-2 scrollbar-track-transparent">
-                    
-                    <% movieDataArrays[3].forEach(andata=> { %>
+            <section id="animated" class="py-12 border-t border-t-gray-600">
+                <h1 class="p-6 px-8 text-2xl font-semibold text-white">ANIMATED </h1>
+                <div class="flex overflow-y-hidden overflow-x-scroll gap-24 p-6 pb-20 scrollbar scrollbar-thumb-zinc-400 scrollbar-width-2 scrollbar-track-transparent ">
 
-                        <a href="/singlemovie?id=<%= andata.id %>" alt="<%= andata.title %>" class="hover:opacity-80 focus:opacity-80 shadow-md hover:shadow-none focus:shadow-none shadow-gray-400 bg-black ">   
-                            <div class="min-w-[220px]  min-h-[300px] trending-card overflow-hidden">
-                                <%- `<img src="https://image.tmdb.org/t/p/original/${andata.poster_path}"
-                                    class="max-w-[220px] w-full h-max" alt="">` %>
-                                    <p
-                                        class="bg-black flex flex-col  text-white px-6 pb-2 pt-6">
-                                        <span class="font-light text-lg pb-2 border-b border-b-gray-800">
-                                            <%= andata.title %>
-                                        </span><span class="pt-3 pl-1 text-gray-700">
-                                            <%= andata.vote_average.toFixed(1) %>
-                                        </span>
-                                    </p>
-                            </div>
-                        </a>
+                    <% movieDataArrays[3].forEach(data=> { %>
+                        <a href="/singlemovie?id=<%= data.id %>" alt="<%= data.title %>" class=" border border-black hover:opacity-80 focus:opacity-80 hover:shadow-none focus:shadow-none shadow-xl shadow-gray-800 bg-gray-900 ">   
+                                <div class="min-w-[300px]  min-h-[300px] trending-card overflow-hidden">
+                                    <%- `<img src="https://image.tmdb.org/t/p/original/${data.poster_path}"
+                                        class="max-w-[300px] w-full h-max" alt="">` %>
+                                        <p
+                                            class="bg-transparent flex flex-col text-white px-4 pb-2 pt-4">
+                                            <span class="pt-2 pl-1 ">
+                                                <%= data.vote_average.toFixed(1) %>
+                                            </span>
+                                            <span class="font-semibold text-lg  border-b border-b-gray-200">
+                                                <%= data.title %>
+                                            </span>
+                                        </p>
+                                </div>
+                            </a>
                     <% }); %>
                 </div>
             </section>

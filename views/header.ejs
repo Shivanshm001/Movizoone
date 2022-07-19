@@ -1,7 +1,7 @@
-<header class="bg-zinc-900 bg-opacity-90">
-    <nav class=" py-6 px-2">
+<header class="bg-stone-900">
+    <nav class=" py-4 px-2">
         <div class="flex items-center ">
-            <div class="logo inline"><a href="/"><img src="./public/img/Movizone-logo-croped-removebg.png" class="w-24"
+            <div class="logo inline mb-4"><a href="/"><img src="./public/img/Movizone-logo-croped-removebg.png" class="w-24"
                 alt="Moviezoone logo"></a></div>
             <form action="/search" method="get" class="w-full mx-4">
                 <label for="default-search"
@@ -19,7 +19,13 @@
                         placeholder="Enter movie...">
                     <button type="submit"
                         class="text-white absolute right-[1px] bottom-[1px] bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium text-sm px-4 py-2 dark:bg-red-500 dark:hover:bg-red-600 dark:focus:ring-red-700">Search</button>
-                </div>
+                    </div>
+                    <div class="flex justify-start">
+                        <div class="py-1 flex items-center justify-center">
+                            <input type="checkbox" name="adult" id="includeAdult" class="rounded p-2" value="true">
+                        <label for="includeAdult" class="text-xs ml-0.5 text-white font-light text-opacity-75">Include 18+ in results.</label>
+                        </div>
+                    </div>
             </form>
         </div>
     </nav>

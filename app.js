@@ -39,7 +39,14 @@ const trendingMovies = async () => {
         const trendingDatas = results.map(({ title, poster_path, vote_average, id }) => ({ title, poster_path, vote_average, id }));
         movieDataArrays.push(trendingDatas);
     } catch (error) {
-        console.log(error);
+        console.log(`Trending : ${error.code}`);
+        console.log(`Host name : ${error.hostname}`);
+        // if(error.code == 'ENOTFOUND' && error.hostname == `api.themoviedb.org`){
+        //     movieDataArrays.push({
+        //         "error" : `ENOTFOUND`,
+        //         "msg" : "Cannot fetch data."
+        //     })
+        // }
     }
 }
 trendingMovies();
@@ -55,7 +62,7 @@ const newReleasedMovies = async () => {
         let releasedDatas = results.map(({ title, poster_path, vote_average, release_date, id }) => ({ title, poster_path, vote_average, release_date, id }));
         movieDataArrays.push(releasedDatas);
     } catch (error) {
-        console.log(error);
+        console.log(`New Released : ${error.code}`);
     }
 }
 newReleasedMovies();
@@ -71,8 +78,7 @@ const actionMovies = async () => {
         const actionDatas = results.map(({ title, poster_path, vote_average, id }) => ({ title, poster_path, vote_average, id }));
         movieDataArrays.push(actionDatas);
     } catch (error) {
-        console.log("Error in axios : " + error);
-        console.log(error.code);
+        console.log(`Acton moives : ${error.code}`);
     }
 }
 actionMovies();
@@ -87,7 +93,7 @@ const animatedMovies = async () => {
         const animatedDatas = results.map(({ title, poster_path, vote_average, id }) => ({ title, poster_path, vote_average, id }));
         movieDataArrays.push(animatedDatas);
     } catch (error) {
-        console.log(error);
+        console.log(`Animated Movies : ${error.code}`);
     }
 }
 animatedMovies();
@@ -110,7 +116,7 @@ app.get("/singlemovie", (req, res) => {
             const movieDetails = [data].map(({ title, poster_path, vote_average, id, release_date,overview }) => ({ title, poster_path, vote_average, id,release_date,overview }));
             res.render("singlemovie.ejs", { movieDetails, genres })
         } catch (error) {
-            console.log("axios error : " + error);
+            console.log(`Single movie : ${error.code}`);
         }
     }
     singleMovieData();
@@ -120,8 +126,8 @@ app.get("/singlemovie", (req, res) => {
 app.get("/search",(req,res)=>{
     const {search} = req.query;
     const {adult} = req.query;
-    let includeAdult = false;
-    if(adult === true) includeAdult = true;
+    let includeAdult = "false";
+    if(adult == "true") includeAdult = "true";
     const getSearchedMovie = async ()=>{
         try {
             const {data} = await axios({
@@ -132,15 +138,12 @@ app.get("/search",(req,res)=>{
             const searchedMovies = results.map(({ title, poster_path, vote_average, id }) => ({ title, poster_path, vote_average, id }));
             res.render("search",{searchedMovies})
         } catch (error) {
-            console.log(`Searched movies error : ${error}`);
+            console.log(`Searched movie : ${error.code}`);
         }
     }
     getSearchedMovie();
 })
 
-app.get("/reviews",(req,res)=>{
-    res.sendFile(__dirname + "/review.html")
-})
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, (err) => {
     if (err) console.log(err);
